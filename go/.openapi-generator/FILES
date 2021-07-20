@@ -1,0 +1,17 @@
+.gitignore
+.travis.yml
+README.md
+api/openapi.yaml
+client.go
+configuration.go
+docs/Author.md
+docs/Book.md
+docs/Edition.md
+git_push.sh
+go.mod
+go.sum
+model_author.go
+model_book.go
+model_edition.go
+response.go
+utils.go

@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: Converted from api.yaml with typeconv
+  version: "1"
+servers:
+- url: /
+paths: {}
+components:
+  schemas:
+    Book:
+      additionalProperties: false
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        authors:
+          items:
+            $ref: '#/components/schema/Author'
+          type: array
+        type:
+          anyOf:
+          - $ref: '#/components/schema/BookType'
+          - nullable: true
+        editions:
+          additionalProperties:
+            $ref: '#/components/schema/Edition'
+          type: object
+      required:
+      - authors
+      - editions
+      - title
+      - type
+      type: object
+    Author:
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    Edition:
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+        date:
+          $ref: '#/components/schema/Date'
+      required:
+      - date
+      - name
+      type: object
