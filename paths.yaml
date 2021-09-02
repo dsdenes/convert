@@ -1,0 +1,99 @@
+paths:
+  # Site api endpoints
+  /sms-conversations:
+    get:
+      summary: List of SMS conversations
+      responses:
+        200:
+          $ref: '#/components/schemas/GetConversationsResponse'
+  /sms-conversation/{phoneNumber}:
+    get:
+      summary: List of SMS conversation messages to a given phone number
+      parameters:
+        - in: path
+          name: phoneNumber
+          schema:
+            type: string
+          required: true
+          description: Phone number
+      responses:
+        200:
+          $ref: '#/components/schemas/GetConversationMessagesResponse'
+  /sms-conversations/{phoneNumber}/message:
+    post:
+      summary: Send test message to a given conversation
+      parameters:
+        - in: path
+          name: phoneNumber
+          schema:
+            type: string
+          required: true
+          description: Phone number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendMessageToConversationRequest'
+      responses:
+        200:
+          $ref: '#/components/schemas/SendMessageToConversationResponse'
+
+  # Microservice API endpoints
+  /sites/{siteID}/sms-conversations:
+    get:
+      summary: List of SMS conversations
+      parameters:
+        - in: path
+          name: siteID
+          schema:
+            type: string
+          required: true
+          description: Site id
+      responses:
+        200:
+          $ref: '#/components/schemas/GetConversationsResponse'
+  /sites/{siteID}/sms-conversations/{phoneNumber}:
+    get:
+      summary: List of SMS conversation messages to a given phone number
+      parameters:
+        - in: path
+          name: siteID
+          schema:
+            type: string
+          required: true
+          description: Site id
+        - in: path
+          name: phoneNumber
+          schema:
+            type: string
+          required: true
+          description: Phone number
+      responses:
+        200:
+          $ref: '#/components/schemas/GetConversationMessagesResponse'
+  /sites/{siteID}/sms-conversations/{phoneNumber}/message:
+    post:
+      summary: Send test message to a given conversation
+      parameters:
+        - in: path
+          name: siteID
+          schema:
+            type: string
+          required: true
+          description: Site id
+        - in: path
+          name: phoneNumber
+          schema:
+            type: string
+          required: true
+          description: Phone number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendMessageToConversationRequest'
+      responses:
+        200:
+          $ref: '#/components/schemas/SendMessageToConversationResponse'

@@ -4,50 +4,187 @@ info:
   version: "1"
 servers:
 - url: /
-paths: {}
+paths:
+  /sms-conversations:
+    get:
+      responses:
+        "200":
+          $ref: '#/components/schemas/GetConversationsResponse'
+      summary: List of SMS conversations
+  /sms-conversation/{phoneNumber}:
+    get:
+      parameters:
+      - description: Phone number
+        explode: false
+        in: path
+        name: phoneNumber
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          $ref: '#/components/schemas/GetConversationMessagesResponse'
+      summary: List of SMS conversation messages to a given phone number
+  /sms-conversations/{phoneNumber}/message:
+    post:
+      parameters:
+      - description: Phone number
+        explode: false
+        in: path
+        name: phoneNumber
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendMessageToConversationRequest'
+        required: true
+      responses:
+        "200":
+          $ref: '#/components/schemas/SendMessageToConversationResponse'
+      summary: Send test message to a given conversation
+  /sites/{siteID}/sms-conversations:
+    get:
+      parameters:
+      - description: Site id
+        explode: false
+        in: path
+        name: siteID
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          $ref: '#/components/schemas/GetConversationsResponse'
+      summary: List of SMS conversations
+  /sites/{siteID}/sms-conversations/{phoneNumber}:
+    get:
+      parameters:
+      - description: Site id
+        explode: false
+        in: path
+        name: siteID
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Phone number
+        explode: false
+        in: path
+        name: phoneNumber
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          $ref: '#/components/schemas/GetConversationMessagesResponse'
+      summary: List of SMS conversation messages to a given phone number
+  /sites/{siteID}/sms-conversations/{phoneNumber}/message:
+    post:
+      parameters:
+      - description: Site id
+        explode: false
+        in: path
+        name: siteID
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Phone number
+        explode: false
+        in: path
+        name: phoneNumber
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendMessageToConversationRequest'
+        required: true
+      responses:
+        "200":
+          $ref: '#/components/schemas/SendMessageToConversationResponse'
+      summary: Send test message to a given conversation
 components:
   schemas:
-    Book:
+    SMSConversationMessage:
       additionalProperties: false
       properties:
-        title:
+        direction:
           type: string
-        description:
+        isSuccessful:
+          type: boolean
+        isAutomatic:
+          type: boolean
+        timestamp:
           type: string
-        authors:
+        text:
+          type: string
+      required:
+      - direction
+      - isAutomatic
+      - isSuccessful
+      - text
+      - timestamp
+      type: object
+    SMSConversation:
+      additionalProperties: false
+      properties:
+        phoneNumber:
+          type: string
+        lastInteractionAt:
+          type: string
+        lastMessageText:
+          type: string
+        lastMessageFailed:
+          type: boolean
+      required:
+      - lastInteractionAt
+      - lastMessageFailed
+      - lastMessageText
+      - phoneNumber
+      type: object
+    GetConversationsResponse:
+      additionalProperties: false
+      properties:
+        data:
           items:
-            $ref: '#/components/schema/Author'
+            $ref: '#/components/schemas/SMSConversation'
           type: array
-        type:
-          anyOf:
-          - $ref: '#/components/schema/BookType'
-          - nullable: true
-        editions:
-          additionalProperties:
-            $ref: '#/components/schema/Edition'
-          type: object
       required:
-      - authors
-      - editions
-      - title
-      - type
+      - data
       type: object
-    Author:
+    GetConversationMessagesResponse:
       additionalProperties: false
       properties:
-        name:
+        data:
+          items:
+            $ref: '#/components/schemas/SMSConversationMessage'
+          type: array
+      required:
+      - data
+      type: object
+    SendMessageToConversationRequest:
+      additionalProperties: false
+      example:
+        text: text
+      properties:
+        text:
           type: string
       required:
-      - name
+      - text
       type: object
-    Edition:
+    SendMessageToConversationResponse:
       additionalProperties: false
       properties:
-        name:
-          type: string
-        date:
-          $ref: '#/components/schema/Date'
-      required:
-      - date
-      - name
+        error: {}
       type: object

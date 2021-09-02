@@ -78,13 +78,22 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*DefaultApi* | [**SitesSiteIDSmsConversationsGet**](docs/DefaultApi.md#sitessiteidsmsconversationsget) | **Get** /sites/{siteID}/sms-conversations | List of SMS conversations
+*DefaultApi* | [**SitesSiteIDSmsConversationsPhoneNumberGet**](docs/DefaultApi.md#sitessiteidsmsconversationsphonenumberget) | **Get** /sites/{siteID}/sms-conversations/{phoneNumber} | List of SMS conversation messages to a given phone number
+*DefaultApi* | [**SitesSiteIDSmsConversationsPhoneNumberMessagePost**](docs/DefaultApi.md#sitessiteidsmsconversationsphonenumbermessagepost) | **Post** /sites/{siteID}/sms-conversations/{phoneNumber}/message | Send test message to a given conversation
+*DefaultApi* | [**SmsConversationPhoneNumberGet**](docs/DefaultApi.md#smsconversationphonenumberget) | **Get** /sms-conversation/{phoneNumber} | List of SMS conversation messages to a given phone number
+*DefaultApi* | [**SmsConversationsGet**](docs/DefaultApi.md#smsconversationsget) | **Get** /sms-conversations | List of SMS conversations
+*DefaultApi* | [**SmsConversationsPhoneNumberMessagePost**](docs/DefaultApi.md#smsconversationsphonenumbermessagepost) | **Post** /sms-conversations/{phoneNumber}/message | Send test message to a given conversation
 
 
 ## Documentation For Models
 
- - [Author](docs/Author.md)
- - [Book](docs/Book.md)
- - [Edition](docs/Edition.md)
+ - [GetConversationMessagesResponse](docs/GetConversationMessagesResponse.md)
+ - [GetConversationsResponse](docs/GetConversationsResponse.md)
+ - [SMSConversation](docs/SMSConversation.md)
+ - [SMSConversationMessage](docs/SMSConversationMessage.md)
+ - [SendMessageToConversationRequest](docs/SendMessageToConversationRequest.md)
+ - [SendMessageToConversationResponse](docs/SendMessageToConversationResponse.md)
 
 
 ## Documentation For Authorization
@@ -109,5 +118,6 @@ Each of these functions takes a value of the given basic type and returns a poin
 * `PtrTime`
 
 ## Author
+
 
 

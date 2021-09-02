@@ -1,21 +1,30 @@
-export interface Book {
-  title: string
-  description?: string
-  authors: Author[]
-  type: BookType | null
-  editions: { [editionName: string]: Edition }
+export interface SMSConversationMessage {
+  direction: string
+  isSuccessful: boolean
+  isAutomatic: boolean
+  timestamp: string
+  text: string
 }
 
-export interface Author {
-  name: string
+export interface SMSConversation {
+  phoneNumber: string
+  lastInteractionAt: string
+  lastMessageText: string
+  lastMessageFailed: boolean
 }
 
-export interface Edition {
-  name: string
-  date: Date
+export type GetConversationsResponse = {
+  data: SMSConversation[]
 }
 
-export enum BookType {
-  hardcover = 'hardcover',
-  ebook = 'ebook'
+export type GetConversationMessagesResponse = {
+  data: SMSConversationMessage[]
+}
+
+export interface SendMessageToConversationRequest {
+  text: string
+}
+
+export interface SendMessageToConversationResponse {
+  error?: any
 }
