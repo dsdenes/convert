@@ -1,3 +1,79 @@
+openapi: 3.0.0
+info:
+  title: Converted from api.yaml with typeconv
+  version: '1'
+components:
+  schemas:
+    SMSConversationMessage:
+      properties:
+        direction:
+          type: string
+        isSuccessful:
+          type: boolean
+        isAutomatic:
+          type: boolean
+        timestamp:
+          type: string
+        text:
+          type: string
+      required:
+        - direction
+        - isSuccessful
+        - isAutomatic
+        - timestamp
+        - text
+      additionalProperties: false
+      type: object
+    SMSConversation:
+      properties:
+        phoneNumber:
+          type: string
+        lastInteractionAt:
+          type: string
+        lastMessageText:
+          type: string
+        lastMessageFailed:
+          type: boolean
+      required:
+        - phoneNumber
+        - lastInteractionAt
+        - lastMessageText
+        - lastMessageFailed
+      additionalProperties: false
+      type: object
+    GetConversationsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SMSConversation'
+          type: array
+      required:
+        - data
+      additionalProperties: false
+      type: object
+    GetConversationMessagesResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SMSConversationMessage'
+          type: array
+      required:
+        - data
+      additionalProperties: false
+      type: object
+    SendMessageToConversationRequest:
+      properties:
+        text:
+          type: string
+      required:
+        - text
+      additionalProperties: false
+      type: object
+    SendMessageToConversationResponse:
+      properties:
+        error: {}
+      additionalProperties: false
+      type: object
 paths:
   # Site api endpoints
   /sms-conversations:
