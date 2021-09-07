@@ -1,42 +1,43 @@
 openapi: 3.0.0
 info:
-  title: Converted from api.yaml with typeconv
-  version: "1"
+  title: /sms-conversion
+  version: '1'
+  description: ''
 servers:
-- url: /
+  - url: /
 paths:
   /sms-conversations:
     get:
       responses:
-        "200":
+        '200':
           $ref: '#/components/schemas/GetConversationsResponse'
       summary: List of SMS conversations
-  /sms-conversation/{phoneNumber}:
+  '/sms-conversation/{phoneNumber}':
     get:
       parameters:
-      - description: Phone number
-        explode: false
-        in: path
-        name: phoneNumber
-        required: true
-        schema:
-          type: string
-        style: simple
+        - description: Phone number
+          explode: false
+          in: path
+          name: phoneNumber
+          required: true
+          schema:
+            type: string
+          style: simple
       responses:
-        "200":
+        '200':
           $ref: '#/components/schemas/GetConversationMessagesResponse'
       summary: List of SMS conversation messages to a given phone number
-  /sms-conversations/{phoneNumber}/message:
+  '/sms-conversations/{phoneNumber}/message':
     post:
       parameters:
-      - description: Phone number
-        explode: false
-        in: path
-        name: phoneNumber
-        required: true
-        schema:
-          type: string
-        style: simple
+        - description: Phone number
+          explode: false
+          in: path
+          name: phoneNumber
+          required: true
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json:
@@ -44,66 +45,66 @@ paths:
               $ref: '#/components/schemas/SendMessageToConversationRequest'
         required: true
       responses:
-        "200":
+        '200':
           $ref: '#/components/schemas/SendMessageToConversationResponse'
       summary: Send test message to a given conversation
-  /sites/{siteID}/sms-conversations:
+  '/sites/{siteID}/sms-conversations':
     get:
       parameters:
-      - description: Site id
-        explode: false
-        in: path
-        name: siteID
-        required: true
-        schema:
-          type: string
-        style: simple
+        - description: Site id
+          explode: false
+          in: path
+          name: siteID
+          required: true
+          schema:
+            type: string
+          style: simple
       responses:
-        "200":
+        '200':
           $ref: '#/components/schemas/GetConversationsResponse'
       summary: List of SMS conversations
-  /sites/{siteID}/sms-conversations/{phoneNumber}:
+  '/sites/{siteID}/sms-conversations/{phoneNumber}':
     get:
       parameters:
-      - description: Site id
-        explode: false
-        in: path
-        name: siteID
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Phone number
-        explode: false
-        in: path
-        name: phoneNumber
-        required: true
-        schema:
-          type: string
-        style: simple
+        - description: Site id
+          explode: false
+          in: path
+          name: siteID
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: Phone number
+          explode: false
+          in: path
+          name: phoneNumber
+          required: true
+          schema:
+            type: string
+          style: simple
       responses:
-        "200":
+        '200':
           $ref: '#/components/schemas/GetConversationMessagesResponse'
       summary: List of SMS conversation messages to a given phone number
-  /sites/{siteID}/sms-conversations/{phoneNumber}/message:
+  '/sites/{siteID}/sms-conversations/{phoneNumber}/message':
     post:
       parameters:
-      - description: Site id
-        explode: false
-        in: path
-        name: siteID
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Phone number
-        explode: false
-        in: path
-        name: phoneNumber
-        required: true
-        schema:
-          type: string
-        style: simple
+        - description: Site id
+          explode: false
+          in: path
+          name: siteID
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: Phone number
+          explode: false
+          in: path
+          name: phoneNumber
+          required: true
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json:
@@ -111,7 +112,7 @@ paths:
               $ref: '#/components/schemas/SendMessageToConversationRequest'
         required: true
       responses:
-        "200":
+        '200':
           $ref: '#/components/schemas/SendMessageToConversationResponse'
       summary: Send test message to a given conversation
 components:
@@ -130,11 +131,11 @@ components:
         text:
           type: string
       required:
-      - direction
-      - isAutomatic
-      - isSuccessful
-      - text
-      - timestamp
+        - direction
+        - isAutomatic
+        - isSuccessful
+        - text
+        - timestamp
       type: object
     SMSConversation:
       additionalProperties: false
@@ -148,10 +149,10 @@ components:
         lastMessageFailed:
           type: boolean
       required:
-      - lastInteractionAt
-      - lastMessageFailed
-      - lastMessageText
-      - phoneNumber
+        - lastInteractionAt
+        - lastMessageFailed
+        - lastMessageText
+        - phoneNumber
       type: object
     GetConversationsResponse:
       additionalProperties: false
@@ -161,7 +162,7 @@ components:
             $ref: '#/components/schemas/SMSConversation'
           type: array
       required:
-      - data
+        - data
       type: object
     GetConversationMessagesResponse:
       additionalProperties: false
@@ -171,7 +172,7 @@ components:
             $ref: '#/components/schemas/SMSConversationMessage'
           type: array
       required:
-      - data
+        - data
       type: object
     SendMessageToConversationRequest:
       additionalProperties: false
@@ -181,7 +182,7 @@ components:
         text:
           type: string
       required:
-      - text
+        - text
       type: object
     SendMessageToConversationResponse:
       additionalProperties: false
